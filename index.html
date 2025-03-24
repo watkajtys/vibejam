@@ -547,15 +547,13 @@
 
         /* --- Sponsors Section --- */
 
-        ./* --- Sponsors Section --- */
-
         .sponsors-section {
             padding: 2rem;
             text-align: center;
             background-color: #000; /* Direct color value */
             color: #fff; /* Direct color value */
             border-top: 2px solid #6ee7b7; /* Direct color value */
-            margin-top: 2rem; /* Space from previous content */
+            margin: 2rem 0; /* Space from previous content */
         }
 
         .sponsors-section h2 {
@@ -572,15 +570,18 @@
             justify-content: center; /* Center sponsors horizontally */
             align-items: center; /* Center vertically */
             gap: 2rem; /* Spacing between sponsors */
+            margin: 3rem auto;
         }
 
         .sponsor {
             display: flex;
             flex-direction: column; /* Stack logo and name vertically */
             align-items: center; /* Center items within each sponsor */
+            justify-content: space-between;
             text-decoration: none; /* Remove underline from links */
             color: #fff; /* Direct color value */
             transition: color 0.3s ease;
+            height: 150px;
         }
 
         .sponsor:hover {
@@ -588,17 +589,16 @@
         }
 
         .sponsor-logo {
-            width: 120px; /* Adjust as needed for your logos */
+            width: 160px; /* Adjust as needed for your logos */
             height: auto; /* Maintain aspect ratio */
             margin-bottom: 0.5rem; /* Space between logo and name */
             border: 2px solid transparent; /* For potential hover effect */
             border-radius: 0.25rem; /* Slightly rounded corners */
             transition: border-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
-            box-shadow: 0 0 10px rgba(110, 231, 183, 0.5);
-
+            padding: 1rem;
         }
 
-        .sponsor:hover .sponsor-logo {
+        .sponsor:hover  {
             border-color: #6ee7b7; /* Direct color value */
             transform: scale(1.05); /* Slightly enlarge on hover */
         }
@@ -696,6 +696,75 @@
 
         }
 
+
+        /* New styles for the rules section */
+        .rules-section {
+            padding: 2rem;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .rules-section h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            text-align: center;
+            background-image: repeating-linear-gradient(
+                    to bottom,
+                    transparent 0,
+                    transparent 1px,
+                    #fff 1px,
+                    #fff 3px
+            );
+            background-size: 100% 3px;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: scanline 6s infinite;
+        }
+
+        .rules-section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px;
+            border: 2px solid #4ade80;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        .rules-section li {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: #d1d5db;
+            padding-left: 1rem;
+            position: relative;
+        }
+        .rules-section li::before{
+            content: '>';
+            color: #4ade80;
+            position: absolute;
+            left: 0;
+        }
+
+        .rules-section p {
+            font-size: 1.2rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -710,6 +779,17 @@
 </div>
 <div class="header-below-fold">
     2025 Vibe Coding Game Jam
+</div>
+
+<div class="rules-section">
+    <h2 class="scanline">Rules</h2>
+    <ul>
+        <li><strong>Deadline:</strong> 04.01.2025</li>
+        <li><strong>Build With AI:</strong>80% of code must be written by AI</li>
+        <li><strong>Language:</strong> Use any framework you'd like. Three.js is a popular choice.</li>
+        <li><strong>Collaboration:</strong> Teams of up to 4 people.</li>
+        <li><strong>Mobile Ready:</strong> Games should be playable on a mobile browser.</li>
+    </ul>
 </div>
 
 <div class="submission-section">
@@ -729,23 +809,23 @@
         <h2>Jury</h2>
         <div class="jury-members">
             <div class="jury-member-box">
-                <img src="https://via.placeholder.com/100" alt="Karpathy">
+                <img src="/karpathy.jpg" alt="Karpathy">
                 <a href="https://karpathy.ai/">@karpathy</a>
             </div>
             <div class="jury-member-box">
-                <img src="https://via.placeholder.com/100" alt="Timsoret">
+                <img src="/timsoret.jpg" alt="Timsoret">
                 <a href="https://timsoret.com/">@timsoret</a>
             </div>
             <div class="jury-member-box">
-                <img src="https://via.placeholder.com/100" alt="Mrdoob">
+                <img src="/mrdoob.jpg" alt="Mrdoob">
                 <a href="https://mrdoob.com/">@mrdoob</a>
             </div>
             <div class="jury-member-box">
-                <img src="https://via.placeholder.com/100" alt="S13k">
+                <img src="/s13k_.jpg" alt="S13k">
                 <a href="#">@s13k_</a>
             </div>
             <div class="jury-member-box">
-                <img src="https://via.placeholder.com/100" alt="Levelsio">
+                <img src="/levelsio.jpg" alt="Levelsio">
                 <a href="https://levels.io/">@levelsio</a>
             </div>
         </div>
@@ -753,22 +833,20 @@
             <h2>Sponsored By</h2>
             <div class="sponsors-list">
                 <a href="https://www.boltdotnew.com" target="_blank" rel="noopener noreferrer" class="sponsor">
-                    <img src="path/to/boltdotnew-logo.png" alt="Bolt.new Logo" class="sponsor-logo">
+                    <img src="/bolt.svg" alt="Bolt.new Logo" class="sponsor-logo">
                     <span class="sponsor-name">@boltdotnew</span>
                 </a>
                 <a href="https://coderabbitai.com" target="_blank" rel="noopener noreferrer" class="sponsor">
-                    <img src="path/to/coderabbitai-logo.png" alt="CoderabbitAI Logo" class="sponsor-logo">
+                    <img src="/coderabbit.svg" alt="CoderabbitAI Logo" class="sponsor-logo">
                     <span class="sponsor-name">@coderabbitai</span>
                 </a>
             </div>
+            <p class="hashtag">Hashtag: #vibejam</p>
         </div>
-    </div>
-    <div>
-        <p class="hashtag">Hashtag: #vibejam</p>
     </div>
     <footer class="page-footer">
         <a href="https://www.builtbyvibes.com" target="_blank" rel="noopener noreferrer" class="footer-link">
-            www.builtbyvibes.com
+            builtbyvibes
         </a>
     </footer>
 </div>
