@@ -89,6 +89,7 @@
             align-items: center;
             justify-content: center;
             height: 100%;
+            width: 100%;
         }
         h1 {
             font-family: 'Press Start 2P', monospace;
@@ -107,45 +108,6 @@
         }
         .game-jam-title {
             color: #6ee7b7;
-        }
-        .ai-title {
-        }
-        .enter-nexus-button {
-            padding: 1rem 2rem;
-            font-family: 'Monospace', monospace;
-            font-size: 1.2rem;
-            background-image: linear-gradient(to right, #8b5cf6, #3b82f6);
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            width: fit-content;
-        }
-        .enter-nexus-button:hover {
-            background-image: linear-gradient(to right, #9333ea, #2563eb);
-            transform: scale(1.05);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
-        }
-        .enter-nexus-button span {
-            position: relative;
-            z-index: 1;
-        }
-        .enter-nexus-button::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 0;
-        }
-        .enter-nexus-button:hover::before {
-            opacity: 0.5;
         }
         .deadline-text {
             font-size: 1rem;
@@ -264,7 +226,7 @@
             font-size: 2rem;
             margin-bottom: 2rem;
             position: absolute;
-            bottom: 0;
+            bottom: 25px;
             left: 0;
             width: 100%;
         }
@@ -453,7 +415,7 @@
             }
         }
 
-        /* Styles for the jury section */
+        * Styles for the jury section */
         .jury-section {
             margin-top: 2rem;
             padding: 2rem;
@@ -482,23 +444,12 @@
 
         .jury-members {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 2rem;
-            justify-content: space-around; /* Changed to space-around */
+            justify-content: center;
             margin-bottom: 2rem;
         }
 
-        .jury-members {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            justify-content: space-around;
-            margin-bottom: 2rem;
-        }
-        .jury-members:last-child {
-            justify-self: center;
-            align-content: center;
-        }
 
         .jury-member-box {
             display: flex;
@@ -509,39 +460,39 @@
             width: 100%;
             height: auto;
             background-color: #111;
-            border: 2px solid #3b82f6;
             border-radius: 0.5rem;
             padding: 1rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 0 2px #3b82f6;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none; /* Remove underline from the entire box */
+            color: inherit; /* Inherit text color from parent */
         }
 
         .jury-member-box:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7), 0 0 0 4px #3b82f6;
         }
 
         .jury-member-box img {
             width: 120px;
             height: 120px;
-            border-radius: 50%;
+            border-radius: .5rem;
             object-fit: cover;
             margin-bottom: 1rem;
-            border: 4px solid #6ee7b7; /* Increased border width */
-            box-shadow: 0 0 10px #6ee7b7; /* Add a glow to the image */
+            box-shadow: inset 0 0 10px #6ee7b7;
         }
 
-        .jury-member-box a {
-            font-family: 'Press Start 2P', monospace; /* Swapped to Press Start 2P */
+        /* Style for the name inside the link */
+        .jury-member-name {
+            font-family: 'Press Start 2P', monospace;
             font-size: 1.2rem;
-            color: #fff; /* Changed to white */
-            text-decoration: none;
-            transition: color 0.3s ease;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Added text shadow */
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease; /* Add transition for hover effect */
         }
 
-        .jury-member-box a:hover {
-            color: #34d399;
+        .jury-member-box:hover .jury-member-name {
+            color: #34d399; /* Change text color on hover */
         }
 
 
@@ -621,8 +572,12 @@
 
         /* Responsive adjustments */
         @media (max-width: 640px) {
+            .sponsors-section {
+                margin: 0 auto;
+                padding: 0;
+            }
             .sponsor-logo {
-                width: 80px; /* Smaller logos on small screens */
+                width: 100%; /* Smaller logos on small screens */
             }
             .sponsor-name{
                 font-size: 0.7rem;
@@ -636,23 +591,6 @@
             font-family: 'Press Start 2P', monospace;
             text-shadow: 0 0 12px rgba(255, 219, 88, 0.9);
             margin-top: 1rem; /* Space from sponsors */
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 640px) {
-            .sponsor-logo {
-                width: 80px; /* Smaller logos on small screens */
-            }
-            .sponsor-name{
-                font-size: 0.7rem;
-            }
-        }
-
-        .hashtag {
-            font-size: 1.5rem;
-            color: #ffdb58;
-            font-family: 'Press Start 2P', monospace;
-            text-shadow: 0 0 12px rgba(255, 219, 88, 0.9);
         }
 
         .page-footer {
@@ -765,6 +703,60 @@
             text-align: center;
         }
 
+        pre {
+            background-color: #111; /* Black background */
+            color: #fff; /* White text */
+            font-family: 'Monospace', monospace; /* Monospace font for code */
+            border: 2px solid #4ade80; /* Green border, from rules box */
+            border-radius: 0.5rem; /* Rounded corners */
+            padding: 1rem; /* Padding inside the block */
+            margin: 1rem auto; /* Margin around the block, auto for horizontal centering */
+            overflow-x: auto; /* Horizontal scrollbar for long code lines */
+            max-width: 600px; /* Match max-width of rules box */
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5); /* Green shadow, from rules box */
+            line-height: 1.5;  /* Improved line height for readability */
+            text-align: left; /* left align the text */
+        }
+
+        /* Style for the code element (inside pre) */
+        code {
+            font-family: 'Monospace', monospace; /* Ensure monospace font */
+            color: #fff; /* White text color */
+            font-size: 0.8rem; /* smaller font size */
+            display: block;  /* Important!  code is inline by default.  Make it block */
+            white-space: pre-wrap; /* handle line wrapping */
+            background-color: transparent; /* code element should not have background */
+        }
+
+        /* CSS Down Chevron */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid #fef08a; /* Yellow arrow for retro */
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 4;
+            filter: drop-shadow(0 0 8px rgba(255, 223, 0, 0.8)); /* Add a glow */
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -776,6 +768,7 @@
         <h1>#vibejam</h1>
         <p class="deadline-text">Deadline: <span class="deadline-date scanline-effect">04.01.2025<span class="blinking-cursor">|</span></span></p>
     </div>
+    <div class="scroll-indicator"></div>
 </div>
 <div class="header-below-fold">
     2025 Vibe Coding Game Jam
@@ -785,11 +778,16 @@
     <h2 class="scanline">Rules</h2>
     <ul>
         <li><strong>Deadline:</strong> 04.01.2025</li>
-        <li><strong>Build With AI:</strong>80% of code must be written by AI</li>
+        <li><strong>Build With AI:</strong> 80% of code must be written by AI</li>
         <li><strong>Language:</strong> Use any framework you'd like. Three.js is a popular choice.</li>
         <li><strong>Collaboration:</strong> Teams of up to 4 people.</li>
         <li><strong>Mobile Ready:</strong> Games should be playable on a mobile browser.</li>
+        <li><strong>Fast:</strong> No loading screens or heavy downloads (!!!)</li>
     </ul>
+    <div class="code-container">
+        <div class="code-title"><h3>Use this code in your game to qualify</h3></div>
+        <pre><code>&lt;a target="_blank" href="https://jam.pieter.com" style="font-family: 'system-ui', sans-serif; position: fixed; bottom: -1px; right: -1px; padding: 7px; font-size: 14px; font-weight: bold; background: #fff; color: #000; text-decoration: none; z-index: 10; border-top-left-radius: 12px; z-index: 10000; border: 1px solid #fff;"&gt;🕹️ Vibe Jam 2025&lt;/a&gt;</code></pre>
+    </div>
 </div>
 
 <div class="submission-section">
@@ -808,37 +806,37 @@
     <div class="jury-section">
         <h2>Jury</h2>
         <div class="jury-members">
-            <div class="jury-member-box">
+            <a href="https://karpathy.ai/" class="jury-member-box">
                 <img src="/karpathy.jpg" alt="Karpathy">
-                <a href="https://karpathy.ai/">@karpathy</a>
-            </div>
-            <div class="jury-member-box">
+                <span class="jury-member-name">@karpathy</span>
+            </a>
+            <a href="https://timsoret.com/" class="jury-member-box">
                 <img src="/timsoret.jpg" alt="Timsoret">
-                <a href="https://timsoret.com/">@timsoret</a>
-            </div>
-            <div class="jury-member-box">
+                <span class="jury-member-name">@timsoret</span>
+            </a>
+            <a href="https://mrdoob.com/" class="jury-member-box">
                 <img src="/mrdoob.jpg" alt="Mrdoob">
-                <a href="https://mrdoob.com/">@mrdoob</a>
-            </div>
-            <div class="jury-member-box">
+                <span class="jury-member-name">@mrdoob</span>
+            </a>
+            <a href="#" class="jury-member-box">
                 <img src="/s13k_.jpg" alt="S13k">
-                <a href="#">@s13k_</a>
-            </div>
-            <div class="jury-member-box">
+                <span class="jury-member-name">@s13k_</span>
+            </a>
+            <a href="https://levels.io/" class="jury-member-box">
                 <img src="/levelsio.jpg" alt="Levelsio">
-                <a href="https://levels.io/">@levelsio</a>
-            </div>
+                <span class="jury-member-name">@levelsio</span>
+            </a>
         </div>
         <div class="sponsors-section">
             <h2>Sponsored By</h2>
             <div class="sponsors-list">
                 <a href="https://www.boltdotnew.com" target="_blank" rel="noopener noreferrer" class="sponsor">
                     <img src="/bolt.svg" alt="Bolt.new Logo" class="sponsor-logo">
-                    <span class="sponsor-name">@boltdotnew</span>
+                    <span class="jury-member-name">@boltdotnew</span>
                 </a>
                 <a href="https://coderabbitai.com" target="_blank" rel="noopener noreferrer" class="sponsor">
                     <img src="/coderabbit.svg" alt="CoderabbitAI Logo" class="sponsor-logo">
-                    <span class="sponsor-name">@coderabbitai</span>
+                    <span class="jury-member-name">@coderabbitai</span>
                 </a>
             </div>
             <p class="hashtag">Hashtag: #vibejam</p>
@@ -846,7 +844,7 @@
     </div>
     <footer class="page-footer">
         <a href="https://www.builtbyvibes.com" target="_blank" rel="noopener noreferrer" class="footer-link">
-            builtbyvibes
+            <h3 class="scanline-effect">builtbyvibes</h3>
         </a>
     </footer>
 </div>
@@ -958,7 +956,7 @@
                 console.error("Error inserting CSS rule:", error);
                 snippet.style.animationName = 'none';
                 snippet.style.transform = `translate(${startX}px, ${startY}px)`;
-                snippet.style.opacity = 0.1;
+                snippet.style.opacity = 0.15;
             }
         }
         return snippet;
