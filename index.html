@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vibe Coding Game Jam</title>
+
+    <meta name="description" content="Join the Vibe Coding Game Jam!  Create AI-powered games and connect with the Vibe community. Deadline: 04.01.2025">
+    <meta name="keywords" content="game jam, coding, AI, artificial intelligence, games, development, vibe, coding competition, three.js, javascript">
+
+    <meta property="og:title" content="2025 Vibe Coding Game Jam">
+    <meta property="og:description" content="Join the Vibe Coding Game Jam! Create AI-powered games and connect with the Vibe community. Deadline: 04.01.2025">
+    <meta property="og:image" content="/vibejam.png">  <meta property="og:url" content="https://yourwebsite.com">  <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vibe Coding Game Jam">
+
+    <meta name="twitter:card" content="summary_large_image">  <meta name="twitter:site" content="@yourtwitterhandle">  <meta name="twitter:creator" content="@yourtwitterhandle"> <meta name="twitter:title" content="Vibe Coding Game Jam">
+    <meta name="twitter:description" content="Join the Vibe Coding Game Jam! Create AI-powered games and connect with the Vibe community. Deadline: 04.01.2025">
+    <meta name="twitter:image" content="/vibejam.png">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         /* Custom CSS for the Code Nexus theme */
@@ -648,44 +660,42 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #000; /* Or a very dark gray, e.g., #111 */
-            color: #666; /* Dim text color for subtlety */
+            background-color: #000; /* Same as main background */
             text-align: center;
             padding: 0.5rem 0; /* Small padding */
-            font-size: 0.8rem; /* Smaller font size */
-            z-index: 10; /* Ensure it's above other content, but below popups/modals */
-            /* Subtle scanline effect */
+            font-size: 0.8rem;
+            z-index: 10;
+
+            /* Scanline animation - copied from h1 and adjusted */
             background-image: repeating-linear-gradient(
-                    0deg,
-                    transparent,
+                    to bottom,
+                    transparent 0,
                     transparent 1px,
-                    rgba(255, 255, 255, 0.05) 1px,  /* Very faint white */
-                    rgba(255, 255, 255, 0.05) 2px
+                    #fff 1px,  /* White color like h1 */
+                    #fff 2px   /* 2px lines like h1 */
             );
-            background-size: 100% 4px; /* Smaller scanline height */
-            animation: footerScanline 5s linear infinite;
-        }
-
-        @keyframes footerScanline {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 0 -4px; /* Match background-size height */
-            }
-        }
-
-        .page-footer a {
-            color: #999; /* Slightly brighter than the footer text */
-            text-decoration: none; /* Remove underline */
-            transition: color 0.3s ease;
-        }
-
-        .page-footer a:hover {
-            color: #fff; /* Brighter on hover */
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            background-size: 100% 3px; /* Match h1 scanline height */
+            -webkit-background-clip: text; /* Apply background to text */
+            background-clip: text;
+            color: transparent; /* Make text transparent - scanline shows through */
+            animation: scanline 6s linear infinite; /* Same animation as h1 */
 
         }
+
+        .footer-link {
+            display: block; /* Make the link fill the entire footer area */
+            width: 100%;
+            height: 100%;
+            color: #fff; /* White text (scanline will be visible) */
+            text-decoration: none;
+            transition:  text-shadow 0.3s ease; /* Smooth transitions */
+
+        }
+        .footer-link:hover{
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+
+        }
+
     </style>
 </head>
 <body>
@@ -757,9 +767,9 @@
         <p class="hashtag">Hashtag: #vibejam</p>
     </div>
     <footer class="page-footer">
-        <div class="footer-content scanline scanline-effect">
-            <a href="https://www.builtbyvibes.com" target="_blank">builtbyvibes</a>
-        </div>
+        <a href="https://www.builtbyvibes.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+            www.builtbyvibes.com
+        </a>
     </footer>
 </div>
 <script>
