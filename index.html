@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding Game Jam</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS for the Code Nexus theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .scanline-effect {
+            position: absolute;
+            inset: 0;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0.3) 2px);
+            background-size: 2px 2px;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .code-snippets-container {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .code-snippet {
+            font-family: 'Monospace', monospace;
+            color: #34d399;
+            font-size: 0.75rem;
+            white-space: pre;
+            user-select: none;
+            text-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
+            opacity: 0.1;
+            position: relative;
+            animation: moveCode 15s infinite; /* Increased animation duration */
+        }
+        @keyframes moveCode {
+            0% {
+                transform: translate(var(--startX), var(--startY));
+                opacity: 0.1;
+            }
+            100% {
+                transform: translate(var(--endX), var(--endY));
+                opacity: 0.1;
+            }
+        }
+        .main-content {
+            text-align: center;
+            position: relative;
+            z-index: 3;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        h1 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 4rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 16px rgba(255, 255, 255, 0.9);
+        }
+        p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.5rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 8px rgba(156, 163, 175, 0.5);
+        }
+        .game-jam-title {
+            color: #6ee7b7;
+        }
+        .ai-title {
+        }
+        .enter-nexus-button {
+            padding: 1rem 2rem;
+            font-family: 'Monospace', monospace;
+            font-size: 1.2rem;
+            background-image: linear-gradient(to right, #8b5cf6, #3b82f6);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            width: fit-content;
+        }
+        .enter-nexus-button:hover {
+            background-image: linear-gradient(to right, #9333ea, #2563eb);
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+        }
+        .enter-nexus-button span {
+            position: relative;
+            z-index: 1;
+        }
+        .enter-nexus-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+        .enter-nexus-button:hover::before {
+            opacity: 0.5;
+        }
+        .deadline-text {
+            font-size: 1rem;
+            color: #9ca3af;
+            margin-top: 1rem;
+        }
+        .deadline-date {
+            color: #fef08a;
+            position: relative; /* Added position: relative; */
+        }
+        .connect-text {
+        }
+        h1 {
+            background-image: repeating-linear-gradient(
+                    to bottom,
+                    transparent 0,
+                    transparent 1px,
+                    #fff 1px,
+                    #fff 3px
+            );
+            background-size: 100% 3px;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: scanline 6s infinite;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 16px rgba(255, 255, 255, 0.9);
+        }
+        @keyframes scanline {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0 -60px;
+            }
+        }
+
+        /* Responsive adjustments using media queries */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            p {
+                font-size: 1.2rem;
+            }
+            .enter-nexus-button {
+                font-size: 1rem;
+                padding: 1rem 2rem;
+            }
+            .code-snippet {
+                font-size: 0.6rem;
+            }
+            .deadline-text {
+                font-size: 0.875rem;
+            }
+        }
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .enter-nexus-button {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.5rem;
+            }
+            .code-snippet {
+                font-size: 0.5rem;
+            }
+            .deadline-text {
+                font-size: 0.75rem;
+            }
+        }
+        .container {
+            align-items: center;
+            justify-content: center;
+            padding-top: 0;
+            height: 100vh;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            justify-content: center;
+        }
+        h1 {
+            margin-bottom: 0.5rem;
+        }
+        p{
+            margin-bottom: 1rem;
+        }
+        .additional-content {
+            position: relative;
+            z-index: 3;
+            padding: 1rem;
+            margin-top: 100vh;
+            text-align: center;
+            width: 100%;
+            display: none;
+        }
+        .below-fold-content {
+            padding: 2rem;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            position: relative;
+            z-index: 3;
+        }
+        .header-below-fold {
+            text-align: center;
+            color: #6ee7b7;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+        .blinking-cursor {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+
+        /* New styles for the submission section */
+        .submission-section {
+            padding: 2rem;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .submission-section h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+        .submission-section p {
+            font-size: 1.2rem;
+            color: #d1d5db;
+            margin-bottom: 2rem;
+        }
+        .submission-section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .submission-section li {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: #d1d5db;
+        }
+        .submission-section a {
+            color: #6ee7b7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .submission-section a:hover {
+            color: #34d399;
+        }
+
+        /* Style for the button */
+        .submit-button {
+            padding: 1rem 2rem;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.2rem;
+            background-color: #3b82f6; /* Initial button color */
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 10px #8b5cf6; /* Glow effect */
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            width: fit-content;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.8); /* Add text shadow */
+        }
+
+        .submit-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #8b5cf6; /* Increase glow on hover */
+        }
+
+        .submit-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(45deg, #8b5cf6 0%, #3b82f6 100%); /* Gradient background */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .submit-button:hover::before {
+            opacity: 0.7; /* Show gradient on hover */
+        }
+
+        /* Add some 80s style */
+        .submit-button {
+            font-family: 'Press Start 2P', monospace; /* Use a retro font */
+            font-size: 1rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+        }
+        .submission-section h2{
+            font-size: 2.5rem;
+        }
+        .submission-section p{
+            font-size: 1.5rem;
+        }
+        .submission-section ul li{
+            font-size: 1.5rem;
+        }
+
+        /* New color schemes */
+        .submit-button.blue {
+            background-color: #3b82f6;
+            box-shadow: 0 0 10px #8b5cf6;
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+        }
+        .submit-button.blue:hover {
+            background-color: #6366f1;
+            box-shadow: 0 0 15px #8b5cf6;
+        }
+        .submit-button.blue::before {
+            background-image: linear-gradient(45deg, #8b5cf6 0%, #3b82f6 100%);
+        }
+
+        .submit-button.green {
+            background-color: #10b981;
+            box-shadow: 0 0 10px #059669;
+            text-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+        }
+        .submit-button.green:hover {
+            background-color: #047857;
+            box-shadow: 0 0 15px #059669;
+        }
+        .submit-button.green::before {
+            background-image: linear-gradient(45deg, #10b981 0%, #059669 100%);
+        }
+
+        .submit-button.purple {
+            background-color: #8b5cf6;
+            box-shadow: 0 0 10px #6d28d9;
+            text-shadow: 0 0 8px rgba(139, 92, 246, 0.8);
+        }
+        .submit-button.purple:hover {
+            background-color: #7e22ce;
+            box-shadow: 0 0 15px #6d28d9;
+        }
+        .submit-button.purple::before {
+            background-image: linear-gradient(45deg, #8b5cf6 0%, #6d28d9 100%);
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center; /* Center the buttons */
+        }
+        .scanline {
+            background-image: repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(255, 255, 255, 0.1) 1px,
+                    rgba(255, 255, 255, 0.1) 2px
+            );
+            background-size: 100% 10px;
+            animation: scanline-animation 2s infinite;
+        }
+
+        @keyframes scanline-animation {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0 -20px;
+            }
+        }
+
+        /* Styles for the jury section */
+        .jury-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            box-sizing: border-box;
+            border-top: 4px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .jury-section h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+
+        .jury-section p {
+            font-size: 1.2rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .jury-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            justify-content: space-around; /* Changed to space-around */
+            margin-bottom: 2rem;
+        }
+
+        .jury-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+        }
+        .jury-members:last-child {
+            justify-self: center;
+            align-content: center;
+        }
+
+        .jury-member-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            width: 100%;
+            height: auto;
+            background-color: #111;
+            border: 2px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .jury-member-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .jury-member-box img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid #6ee7b7; /* Increased border width */
+            box-shadow: 0 0 10px #6ee7b7; /* Add a glow to the image */
+        }
+
+        .jury-member-box a {
+            font-family: 'Press Start 2P', monospace; /* Swapped to Press Start 2P */
+            font-size: 1.2rem;
+            color: #fff; /* Changed to white */
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Added text shadow */
+        }
+
+        .jury-member-box a:hover {
+            color: #34d399;
+        }
+
+
+        /* --- Sponsors Section --- */
+
+        ./* --- Sponsors Section --- */
+
+        .sponsors-section {
+            padding: 2rem;
+            text-align: center;
+            background-color: #000; /* Direct color value */
+            color: #fff; /* Direct color value */
+            border-top: 2px solid #6ee7b7; /* Direct color value */
+            margin-top: 2rem; /* Space from previous content */
+        }
+
+        .sponsors-section h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.5rem; /* Slightly smaller than main headings */
+            margin-bottom: 1rem;
+            color: #6ee7b7; /* Direct color value */
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+
+        .sponsors-list {
+            display: flex;
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            justify-content: center; /* Center sponsors horizontally */
+            align-items: center; /* Center vertically */
+            gap: 2rem; /* Spacing between sponsors */
+        }
+
+        .sponsor {
+            display: flex;
+            flex-direction: column; /* Stack logo and name vertically */
+            align-items: center; /* Center items within each sponsor */
+            text-decoration: none; /* Remove underline from links */
+            color: #fff; /* Direct color value */
+            transition: color 0.3s ease;
+        }
+
+        .sponsor:hover {
+            color: #34d399; /* Direct color value */
+        }
+
+        .sponsor-logo {
+            width: 120px; /* Adjust as needed for your logos */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 0.5rem; /* Space between logo and name */
+            border: 2px solid transparent; /* For potential hover effect */
+            border-radius: 0.25rem; /* Slightly rounded corners */
+            transition: border-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+            box-shadow: 0 0 10px rgba(110, 231, 183, 0.5);
+
+        }
+
+        .sponsor:hover .sponsor-logo {
+            border-color: #6ee7b7; /* Direct color value */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        .sponsor-name {
+            font-family: 'Inter', sans-serif; /* Or 'Monospace' if you prefer */
+            font-size: 1rem;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+
+        }
+
+        /* Add the hashtag styles from earlier, if not already present */
+        .hashtag {
+            font-size: 1.5rem;
+            color: #ffdb58; /* Direct color value */
+            font-family: 'Press Start 2P', monospace;
+            text-shadow: 0 0 12px rgba(255, 219, 88, 0.9);
+            margin-top: 1rem; /* Space from sponsors */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .sponsor-logo {
+                width: 80px; /* Smaller logos on small screens */
+            }
+            .sponsor-name{
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Add the hashtag styles from earlier, if not already present */
+        .hashtag {
+            font-size: 1.5rem;
+            color: #ffdb58; /* Example color - adjust as needed */
+            font-family: 'Press Start 2P', monospace;
+            text-shadow: 0 0 12px rgba(255, 219, 88, 0.9);
+            margin-top: 1rem; /* Space from sponsors */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .sponsor-logo {
+                width: 80px; /* Smaller logos on small screens */
+            }
+            .sponsor-name{
+                font-size: 0.7rem;
+            }
+        }
+
+        .hashtag {
+            font-size: 1.5rem;
+            color: #ffdb58;
+            font-family: 'Press Start 2P', monospace;
+            text-shadow: 0 0 12px rgba(255, 219, 88, 0.9);
+        }
+
+        .page-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000; /* Or a very dark gray, e.g., #111 */
+            color: #666; /* Dim text color for subtlety */
+            text-align: center;
+            padding: 0.5rem 0; /* Small padding */
+            font-size: 0.8rem; /* Smaller font size */
+            z-index: 10; /* Ensure it's above other content, but below popups/modals */
+            /* Subtle scanline effect */
+            background-image: repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 1px,
+                    rgba(255, 255, 255, 0.05) 1px,  /* Very faint white */
+                    rgba(255, 255, 255, 0.05) 2px
+            );
+            background-size: 100% 4px; /* Smaller scanline height */
+            animation: footerScanline 5s linear infinite;
+        }
+
+        @keyframes footerScanline {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0 -4px; /* Match background-size height */
+            }
+        }
+
+        .page-footer a {
+            color: #999; /* Slightly brighter than the footer text */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s ease;
+        }
+
+        .page-footer a:hover {
+            color: #fff; /* Brighter on hover */
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="scanline-effect"></div>
+    <div class="code-snippets-container">
+    </div>
+    <div class="main-content">
+        <h1>#vibejam</h1>
+        <p class="deadline-text">Deadline: <span class="deadline-date scanline-effect">04.01.2025<span class="blinking-cursor">|</span></span></p>
+    </div>
+</div>
+<div class="header-below-fold">
+    2025 Vibe Coding Game Jam
+</div>
+
+<div class="submission-section">
+    <h2>Submit Your Game</h2>
+    <p>Share your AI-powered game with the community!</p>
+    <div class="submission-form-container">
+        <div class="button-container">
+            <a href="http://jam.pieter.com" class="submit-button purple scanline">
+                <span>Submit Game</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="below-fold-content">
+    <div class="jury-section">
+        <h2>Jury</h2>
+        <div class="jury-members">
+            <div class="jury-member-box">
+                <img src="https://via.placeholder.com/100" alt="Karpathy">
+                <a href="https://karpathy.ai/">@karpathy</a>
+            </div>
+            <div class="jury-member-box">
+                <img src="https://via.placeholder.com/100" alt="Timsoret">
+                <a href="https://timsoret.com/">@timsoret</a>
+            </div>
+            <div class="jury-member-box">
+                <img src="https://via.placeholder.com/100" alt="Mrdoob">
+                <a href="https://mrdoob.com/">@mrdoob</a>
+            </div>
+            <div class="jury-member-box">
+                <img src="https://via.placeholder.com/100" alt="S13k">
+                <a href="#">@s13k_</a>
+            </div>
+            <div class="jury-member-box">
+                <img src="https://via.placeholder.com/100" alt="Levelsio">
+                <a href="https://levels.io/">@levelsio</a>
+            </div>
+        </div>
+        <div class="sponsors-section">
+            <h2>Sponsored By</h2>
+            <div class="sponsors-list">
+                <a href="https://www.boltdotnew.com" target="_blank" rel="noopener noreferrer" class="sponsor">
+                    <img src="path/to/boltdotnew-logo.png" alt="Bolt.new Logo" class="sponsor-logo">
+                    <span class="sponsor-name">@boltdotnew</span>
+                </a>
+                <a href="https://coderabbitai.com" target="_blank" rel="noopener noreferrer" class="sponsor">
+                    <img src="path/to/coderabbitai-logo.png" alt="CoderabbitAI Logo" class="sponsor-logo">
+                    <span class="sponsor-name">@coderabbitai</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p class="hashtag">Hashtag: #vibejam</p>
+    </div>
+    <footer class="page-footer">
+        <div class="footer-content scanline scanline-effect">
+            <a href="https://www.builtbyvibes.com" target="_blank">builtbyvibes</a>
+        </div>
+    </footer>
+</div>
+<script>
+    const codeSnippets = [
+        "// Three.js - Create Scene",
+        "const scene = new THREE.Scene();",
+        "// Three.js - Setup Camera",
+        "const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);",
+        "// Three.js - Add Geometry",
+        "const geometry = new THREE.BoxGeometry(1, 1, 1);",
+        "// Three.js - Create Material",
+        "const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });",
+        "// Three.js - Create Mesh",
+        "const cube = new THREE.Mesh(geometry, material);",
+        "// Three.js - Add to Scene",
+        "scene.add(cube);",
+        "// Three.js - Position Camera",
+        "camera.position.z = 5;",
+        "// Three.js - Render Scene",
+        "function animate() {",
+        "  requestAnimationFrame(animate);",
+        "  cube.rotation.x += 0.01;",
+        "  cube.rotation.y += 0.01;",
+        "  renderer.render(scene, camera);",
+        "}",
+        "Reticulating Splines",
+        "// --- Three.js --",
+        "// AI Vibe Generator v1.2",
+        "function createVibe(input) {",
+        "  let vibe = new Vibe();",
+        "  vibe.setInput(input);",
+        "  vibe.process();",
+        "  return vibe;",
+        "}",
+        "// End of Snippet",
+        "// Random Art Generation",
+        "for (let i = 0; i < 100; i++) {",
+        "  let x = Math.random() * window.innerWidth;",
+        "  let y = Math.random() * window.innerHeight;",
+        "  drawCircle(x, y, Math.random() * 20);",
+        "}",
+        "// Procedural Melody",
+        "const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];",
+        "function playMelody() {",
+        "  notes.forEach((note, i) => {",
+        "    const now = audioContext.currentTime + i * 0.2;",
+        "    playNote(note, now);",
+        "  });",
+        "}",
+        "// Texture Generation",
+        "const canvas = document.createElement('canvas');",
+        "const ctx = canvas.getContext('2d');",
+        "ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);",
+        "ctx.fillRect(0,0,canvas.width,canvas.height);",
+    ];
+
+    const codeSnippetsContainer = document.querySelector('.code-snippets-container');
+    const container = document.querySelector('.container');
+
+
+    function getRandomCodeSnippet() {
+        return codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+    }
+
+    function createCodeSnippetElement() {
+        const snippet = document.createElement('div');
+        snippet.classList.add('code-snippet');
+        snippet.textContent = getRandomCodeSnippet();
+        snippet.style.left = `${Math.random() * 100}%`;
+        snippet.style.top = `${Math.random() * 100}%`;
+        snippet.style.opacity = '0.1';
+        const keyframesName = `moveSnippet${Date.now()}`;
+        const startX = Math.random() * window.innerWidth - window.innerWidth / 2;
+        const startY = Math.random() * window.innerHeight - window.innerHeight / 2;
+        const endX = Math.random() * window.innerWidth - window.innerWidth / 2;
+        const endY = Math.random() * window.innerHeight - window.innerHeight / 2;
+
+
+        snippet.style.setProperty('--startX', `${startX}px`);
+        snippet.style.setProperty('--startY', `${startY}px`);
+        snippet.style.setProperty('--endX', `${endX}px`);
+        snippet.style.setProperty('--endY', `${endY}px`);
+
+
+        let styleEl = document.getElementById('snippet-styles');
+        if (!styleEl) {
+            styleEl = document.createElement('style');
+            styleEl.id = 'snippet-styles';
+            document.head.appendChild(styleEl);
+        }
+        if (styleEl.sheet) {
+            try {
+                const cssRule = `@keyframes ${keyframesName} {
+                        0% {
+                            transform: translate(var(--startX), var(--startY));
+                            opacity: 0.1;
+                        }
+                        100% {
+                            transform: translate(var(--endX), var(--endY));
+                            opacity: 0.1;
+                        }
+                    }`;
+                styleEl.sheet.insertRule(cssRule, 0);
+                snippet.style.animationName = keyframesName;
+                snippet.style.animationDuration = `${Math.random() * 12 + 15}s`;
+                snippet.style.animationIterationCount = 'linear';
+            } catch (error) {
+                console.error("Error inserting CSS rule:", error);
+                snippet.style.animationName = 'none';
+                snippet.style.transform = `translate(${startX}px, ${startY}px)`;
+                snippet.style.opacity = 0.1;
+            }
+        }
+        return snippet;
+    }
+
+    for (let i = 0; i < 30; i++) {
+        const snippet = createCodeSnippetElement();
+        snippet.style.left = `${Math.random() * 100}%`;
+        codeSnippetsContainer.appendChild(snippet);
+    }
+
+
+
+</script>
+</body>
