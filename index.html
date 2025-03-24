@@ -849,58 +849,126 @@
     </footer>
 </div>
 <script>
-    const codeSnippets = [
-        "// Three.js - Create Scene",
-        "const scene = new THREE.Scene();",
-        "// Three.js - Setup Camera",
-        "const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);",
-        "// Three.js - Add Geometry",
-        "const geometry = new THREE.BoxGeometry(1, 1, 1);",
-        "// Three.js - Create Material",
-        "const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });",
-        "// Three.js - Create Mesh",
-        "const cube = new THREE.Mesh(geometry, material);",
-        "// Three.js - Add to Scene",
-        "scene.add(cube);",
-        "// Three.js - Position Camera",
-        "camera.position.z = 5;",
-        "// Three.js - Render Scene",
-        "function animate() {",
-        "  requestAnimationFrame(animate);",
-        "  cube.rotation.x += 0.01;",
-        "  cube.rotation.y += 0.01;",
-        "  renderer.render(scene, camera);",
-        "}",
-        "Reticulating Splines",
-        "// --- Three.js --",
-        "// AI Vibe Generator v1.2",
-        "function createVibe(input) {",
-        "  let vibe = new Vibe();",
-        "  vibe.setInput(input);",
-        "  vibe.process();",
-        "  return vibe;",
-        "}",
-        "// End of Snippet",
-        "// Random Art Generation",
-        "for (let i = 0; i < 100; i++) {",
-        "  let x = Math.random() * window.innerWidth;",
-        "  let y = Math.random() * window.innerHeight;",
-        "  drawCircle(x, y, Math.random() * 20);",
-        "}",
-        "// Procedural Melody",
-        "const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];",
-        "function playMelody() {",
-        "  notes.forEach((note, i) => {",
-        "    const now = audioContext.currentTime + i * 0.2;",
-        "    playNote(note, now);",
-        "  });",
-        "}",
-        "// Texture Generation",
-        "const canvas = document.createElement('canvas');",
-        "const ctx = canvas.getContext('2d');",
-        "ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);",
-        "ctx.fillRect(0,0,canvas.width,canvas.height);",
-    ];
+    document.addEventListener('DOMContentLoaded', function() {
+        const codeSnippets = [
+            "// Three.js - Create Scene",
+            "const scene = new THREE.Scene();",
+            "// Three.js - Setup Camera",
+            "const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);",
+            "// Three.js - Add Geometry",
+            "const geometry = new THREE.BoxGeometry(1, 1, 1);",
+            "// Three.js - Create Material",
+            "const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });",
+            "// Three.js - Create Mesh",
+            "const cube = new THREE.Mesh(geometry, material);",
+            "// Three.js - Add to Scene",
+            "scene.add(cube);",
+            "// Three.js - Position Camera",
+            "camera.position.z = 5;",
+            "// Three.js - Render Scene",
+            "function animate() {",
+            "  requestAnimationFrame(animate);",
+            "  cube.rotation.x += 0.01;",
+            "  cube.rotation.y += 0.01;",
+            "  renderer.render(scene, camera);",
+            "}",
+            "Reticulating Splines",
+            "// --- Three.js --",
+            "// AI Vibe Generator v1.2",
+            "function createVibe(input) {",
+            "  let vibe = new Vibe();",
+            "  vibe.setInput(input);",
+            "  vibe.process();",
+            "  return vibe;",
+            "}",
+            "// End of Snippet",
+            "// Random Art Generation",
+            "for (let i = 0; i < 100; i++) {",
+            "  let x = Math.random() * window.innerWidth;",
+            "  let y = Math.random() * window.innerHeight;",
+            "  drawCircle(x, y, Math.random() * 20);",
+            "}",
+            "// Procedural Melody",
+            "const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];",
+            "function playMelody() {",
+            "  notes.forEach((note, i) => {",
+            "    const now = audioContext.currentTime + i * 0.2;",
+            "    playNote(note, now);",
+            "  });",
+            "}",
+            "// Texture Generation",
+            "const canvas = document.createElement('canvas');",
+            "const ctx = canvas.getContext('2d');",
+            "ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);",
+            "ctx.fillRect(0,0,canvas.width,canvas.height);",
+        ];
+
+        const codeSnippetsContainer = document.querySelector('.code-snippets-container');
+        const container = document.querySelector('.container');
+
+
+        function getRandomCodeSnippet() {
+            return codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+        }
+
+        function createCodeSnippetElement() {
+            const snippet = document.createElement('div');
+            snippet.classList.add('code-snippet');
+            snippet.textContent = getRandomCodeSnippet();
+            snippet.style.left = `${Math.random() * 100}%`;
+            snippet.style.top = `${Math.random() * 100}%`;
+            snippet.style.opacity = '0.1';
+            const keyframesName = `moveSnippet${Date.now()}`;
+            const startX = Math.random() * window.innerWidth - window.innerWidth / 2;
+            const startY = Math.random() * window.innerHeight - window.innerHeight / 2;
+            const endX = Math.random() * window.innerWidth - window.innerWidth / 2;
+            const endY = Math.random() * window.innerHeight - window.innerHeight / 2;
+
+
+            snippet.style.setProperty('--startX', `${startX}px`);
+            snippet.style.setProperty('--startY', `${startY}px`);
+            snippet.style.setProperty('--endX', `${endX}px`);
+            snippet.style.setProperty('--endY', `${endY}px`);
+
+
+            let styleEl = document.getElementById('snippet-styles');
+            if (!styleEl) {
+                styleEl = document.createElement('style');
+                styleEl.id = 'snippet-styles';
+                document.head.appendChild(styleEl);
+            }
+            if (styleEl.sheet) {
+                try {
+                    const cssRule = `@keyframes ${keyframesName} {
+                        0% {
+                            transform: translate(var(--startX), var(--startY));
+                            opacity: 0.1;
+                        }
+                        100% {
+                            transform: translate(var(--endX), var(--endY));
+                            opacity: 0.1;
+                        }
+                    }`;
+                    styleEl.sheet.insertRule(cssRule, 0);
+                    snippet.style.animationName = keyframesName;
+                    snippet.style.animationDuration = `${Math.random() * 12 + 15}s`;
+                    snippet.style.animationIterationCount = 'infinite'; // Fixed: Use 'infinite'
+                } catch (error) {
+                    console.error("Error inserting CSS rule:", error);
+                    snippet.style.animationName = 'none';
+                    snippet.style.transform = `translate(${startX}px, ${startY}px)`;
+                    snippet.style.opacity = 0.15;
+                }
+            }
+            return snippet;
+        }
+
+        for (let i = 0; i < 30; i++) {
+            const snippet = createCodeSnippetElement();
+            snippet.style.left = `${Math.random() * 100}%`;
+            codeSnippetsContainer.appendChild(snippet);
+        }
+    });
 
     const codeSnippetsContainer = document.querySelector('.code-snippets-container');
     const container = document.querySelector('.container');
