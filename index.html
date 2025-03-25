@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vibe Coding Game Jam</title>
-
-    <meta name="description" content="Join the Vibe Coding Game Jam!  Create AI-powered games and connect with the Vibe community. Deadline: 04.01.2025">
-    <meta name="keywords" content="game jam, coding, AI, artificial intelligence, games, development, vibe, coding competition, three.js, javascript">
-
+    <meta name="description" content="Join the Vibe Coding Game Jam!  Create AI-powered games. Deadline: 04.01.2025">
+    <meta name="keywords" content="game jam, coding, AI, artificial intelligence, games, vibe, three.js, javascript">
     <meta property="og:title" content="2025 Vibe Coding Game Jam">
-    <meta property="og:description" content="Join the Vibe Coding Game Jam! Create AI-powered games and connect with the Vibe community. Deadline: 04.01.2025">
-    <meta property="og:image" content="/vibejam.png">  <meta property="og:url" content="https://yourwebsite.com">  <meta property="og:type" content="website">
+    <meta property="og:description" content="Join the Vibe Coding Game Jam! Create AI-powered games. Deadline: 04.01.2025">
+    <meta property="og:image" content="/vibejam.png">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:type" content="website">
     <meta property="og:site_name" content="Vibe Coding Game Jam">
-
-    <meta name="twitter:card" content="summary_large_image">  <meta name="twitter:site" content="@yourtwitterhandle">  <meta name="twitter:creator" content="@yourtwitterhandle"> <meta name="twitter:title" content="Vibe Coding Game Jam">
-    <meta name="twitter:description" content="Join the Vibe Coding Game Jam! Create AI-powered games and connect with the Vibe community. Deadline: 04.01.2025">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@yourtwitterhandle">
+    <meta name="twitter:creator" content="@yourtwitterhandle">
+    <meta name="twitter:title" content="Vibe Coding Game Jam">
+    <meta name="twitter:description" content="Join the Vibe Coding Game Jam! Create AI-powered games. Deadline: 04.01.2025">
     <meta name="twitter:image" content="/vibejam.png">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style id="snippet-styles"></style>
     <style>
-        /* Custom CSS for the Code Nexus theme */
+        /* --- Global Styles --- */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000;
@@ -26,7 +29,15 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            overflow-y: auto;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        a:hover {
+            color: #34d399;
+            text-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
         }
         .container {
             width: 100%;
@@ -38,47 +49,8 @@
             position: relative;
             overflow: hidden;
         }
-        .scanline-effect {
-            position: absolute;
-            inset: 0;
-            background-image: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.3) 1px, rgba(0,0,0,0.3) 2px);
-            background-size: 2px 2px;
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .code-snippets-container {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-around;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 2;
-        }
-        .code-snippet {
-            font-family: 'Monospace', monospace;
-            color: #34d399;
-            font-size: 0.75rem;
-            white-space: pre;
-            user-select: none;
-            text-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
-            opacity: 0.1;
-            position: relative;
-            animation: moveCode 15s infinite; /* Increased animation duration */
-        }
-        @keyframes moveCode {
-            0% {
-                transform: translate(var(--startX), var(--startY));
-                opacity: 0.1;
-            }
-            100% {
-                transform: translate(var(--endX), var(--endY));
-                opacity: 0.1;
-            }
-        }
+
+        /* --- Main Content --- */
         .main-content {
             text-align: center;
             position: relative;
@@ -89,26 +61,26 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            width: 100%;
         }
         h1 {
             font-family: 'Press Start 2P', monospace;
             font-size: 4rem;
-            font-weight: bold;
-            color: #fff;
             margin-bottom: 0.5rem;
             text-shadow: 0 0 16px rgba(255, 255, 255, 0.9);
+            background-image: repeating-linear-gradient(
+                    to bottom, transparent 0, transparent 1px, #fff 1px, #fff 3px
+            );
+            background-size: 100% 3px;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: scanline 6s infinite;
         }
-        p {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.5rem;
-            color: #d1d5db;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 8px rgba(156, 163, 175, 0.5);
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 -60px; }
         }
-        .game-jam-title {
-            color: #6ee7b7;
-        }
+
         .deadline-text {
             font-size: 1rem;
             color: #9ca3af;
@@ -116,101 +88,16 @@
         }
         .deadline-date {
             color: #fef08a;
-            position: relative; /* Added position: relative; */
+            position: relative;
         }
-        .connect-text {
+        .blinking-cursor {
+            animation: blink-animation 1s steps(5, start) infinite;
         }
-        h1 {
-            background-image: repeating-linear-gradient(
-                    to bottom,
-                    transparent 0,
-                    transparent 1px,
-                    #fff 1px,
-                    #fff 3px
-            );
-            background-size: 100% 3px;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: scanline 6s infinite;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 16px rgba(255, 255, 255, 0.9);
-        }
-        @keyframes scanline {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 0 -60px;
-            }
+        @keyframes blink-animation {
+            to { visibility: hidden; }
         }
 
-        /* Responsive adjustments using media queries */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-            p {
-                font-size: 1.2rem;
-            }
-            .enter-nexus-button {
-                font-size: 1rem;
-                padding: 1rem 2rem;
-            }
-            .code-snippet {
-                font-size: 0.6rem;
-            }
-            .deadline-text {
-                font-size: 0.875rem;
-            }
-        }
-        @media (max-width: 640px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            p {
-                font-size: 1rem;
-            }
-            .enter-nexus-button {
-                font-size: 0.9rem;
-                padding: 0.75rem 1.5rem;
-            }
-            .code-snippet {
-                font-size: 0.5rem;
-            }
-            .deadline-text {
-                font-size: 0.75rem;
-            }
-        }
-        .container {
-            align-items: center;
-            justify-content: center;
-            padding-top: 0;
-            height: 100vh;
-        }
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            height: 100%;
-            justify-content: center;
-        }
-        h1 {
-            margin-bottom: 0.5rem;
-        }
-        p{
-            margin-bottom: 1rem;
-        }
-        .additional-content {
-            position: relative;
-            z-index: 3;
-            padding: 1rem;
-            margin-top: 100vh;
-            text-align: center;
-            width: 100%;
-            display: none;
-        }
+        /* --- Below Fold Content --- */
         .below-fold-content {
             padding: 2rem;
             text-align: center;
@@ -218,6 +105,8 @@
             color: #fff;
             position: relative;
             z-index: 3;
+            width: 100%; /* Ensure it spans the full width */
+            box-sizing: border-box; /* Include padding in width */
         }
         .header-below-fold {
             text-align: center;
@@ -225,22 +114,18 @@
             font-family: 'Press Start 2P', monospace;
             font-size: 2rem;
             margin-bottom: 2rem;
-            position: absolute;
-            bottom: 25px;
-            left: 0;
-            width: 100%;
-        }
-        .blinking-cursor {
-            animation: blink-animation 1s steps(5, start) infinite;
-        }
-        @keyframes blink-animation {
-            to {
-                visibility: hidden;
-            }
+            background-image: repeating-linear-gradient(
+                    to bottom, transparent 0, transparent 1px, #fff 1px, #fff 3px
+            );
+            background-size: 100% 3px;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: scanline 6s infinite;
         }
 
-        /* New styles for the submission section */
-        .submission-section {
+        /* --- Sections --- */
+        .rules-section, .submission-section, .jury-section, .sponsors-section {
             padding: 2rem;
             text-align: center;
             background-color: #000;
@@ -250,16 +135,26 @@
             width: 100%;
             box-sizing: border-box;
         }
-        .submission-section h2 {
+        .rules-section h2, .submission-section h2, .jury-section h2, .sponsors-section h2{
             font-family: 'Press Start 2P', monospace;
             font-size: 2rem;
-            color: #fff;
+            margin-bottom: 1rem;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            background-image: repeating-linear-gradient(
+                    to bottom, transparent 0, transparent 1px, #fff 1px, #fff 3px
+            );
+            background-size: 100% 3px;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: scanline 6s infinite;
         }
-        .submission-section p {
+
+        .rules-section p, .submission-section p, .jury-section p, .sponsors-section p {
+            font-family: 'Inter', sans-serif;
             font-size: 1.2rem;
             color: #d1d5db;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
         .submission-section ul {
             list-style: none;
@@ -269,30 +164,69 @@
             flex-direction: column;
             align-items: center;
         }
-        .submission-section li {
+        .submission-section ul li,.rules-section li {
+            font-family: 'Inter', sans-serif;
             margin-bottom: 0.5rem;
             font-size: 1.2rem;
             color: #d1d5db;
         }
-        .submission-section a {
-            color: #6ee7b7;
-            text-decoration: none;
-            transition: color 0.3s ease;
+
+        /* --- Rules Section --- */
+        .rules-section ul {
+            text-align: left;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px;
+            border: 2px solid #4ade80;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
         }
-        .submission-section a:hover {
-            color: #34d399;
+        .rules-section li::before {
+            content: '>';
+            color: #4ade80;
+            position: absolute;
+            left: 0;
+        }
+        .rules-section li{
+            padding-left: 1rem;
+            position: relative;
         }
 
-        /* Style for the button */
+        /* --- Code Block --- */
+        pre {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Monospace', monospace;
+            border: 2px solid #4ade80;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem auto;
+            overflow-x: auto;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+            line-height: 1.5;
+            text-align: left;
+        }
+        code {
+            font-family: 'Monospace', monospace;
+            color: #fff;
+            font-size: 0.8rem;
+            display: block;
+            white-space: pre-wrap;
+            background-color: transparent;
+        }
+
+        /* --- Button --- */
         .submit-button {
-            padding: 1rem 2rem;
+            padding: 0.75rem 1.5rem;
             font-family: 'Press Start 2P', monospace;
-            font-size: 1.2rem;
-            background-color: #3b82f6; /* Initial button color */
+            font-size: 1rem;
+            background-color: #8b5cf6; /* Purple */
             color: #fff;
             border: none;
-            border-radius: 0.5rem;
-            box-shadow: 0 0 10px #8b5cf6; /* Glow effect */
+            border-radius: 0.25rem;
+            box-shadow: 0 0 10px #6d28d9;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
@@ -302,146 +236,39 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            text-shadow: 0 0 8px rgba(59, 130, 246, 0.8); /* Add text shadow */
+            text-shadow: 0 0 8px rgba(139, 92, 246, 0.8);
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
         }
-
         .submit-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px #8b5cf6; /* Increase glow on hover */
+            box-shadow: 0 0 15px #6d28d9;
+            background-color: #7e22ce; /* Darker purple on hover */
         }
-
         .submit-button span {
             position: relative;
             z-index: 1;
         }
-
-        .submit-button::before {
+        .submit-button::before { /* Gradient, only visible on hover */
             content: '';
             position: absolute;
             inset: 0;
-            background-image: linear-gradient(45deg, #8b5cf6 0%, #3b82f6 100%); /* Gradient background */
+            background-image: linear-gradient(45deg, #8b5cf6 0%, #6d28d9 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: 0;
         }
-
         .submit-button:hover::before {
-            opacity: 0.7; /* Show gradient on hover */
+            opacity: 0.7;
         }
-
-        /* Add some 80s style */
-        .submit-button {
-            font-family: 'Press Start 2P', monospace; /* Use a retro font */
-            font-size: 1rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.25rem;
-            letter-spacing: 0.1rem;
-            text-transform: uppercase;
-        }
-        .submission-section h2{
-            font-size: 2.5rem;
-        }
-        .submission-section p{
-            font-size: 1.5rem;
-        }
-        .submission-section ul li{
-            font-size: 1.5rem;
-        }
-
-        /* New color schemes */
-        .submit-button.blue {
-            background-color: #3b82f6;
-            box-shadow: 0 0 10px #8b5cf6;
-            text-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
-        }
-        .submit-button.blue:hover {
-            background-color: #6366f1;
-            box-shadow: 0 0 15px #8b5cf6;
-        }
-        .submit-button.blue::before {
-            background-image: linear-gradient(45deg, #8b5cf6 0%, #3b82f6 100%);
-        }
-
-        .submit-button.green {
-            background-color: #10b981;
-            box-shadow: 0 0 10px #059669;
-            text-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
-        }
-        .submit-button.green:hover {
-            background-color: #047857;
-            box-shadow: 0 0 15px #059669;
-        }
-        .submit-button.green::before {
-            background-image: linear-gradient(45deg, #10b981 0%, #059669 100%);
-        }
-
-        .submit-button.purple {
-            background-color: #8b5cf6;
-            box-shadow: 0 0 10px #6d28d9;
-            text-shadow: 0 0 8px rgba(139, 92, 246, 0.8);
-        }
-        .submit-button.purple:hover {
-            background-color: #7e22ce;
-            box-shadow: 0 0 15px #6d28d9;
-        }
-        .submit-button.purple::before {
-            background-image: linear-gradient(45deg, #8b5cf6 0%, #6d28d9 100%);
-        }
-
         .button-container {
             display: flex;
             gap: 1rem;
             margin-top: 2rem;
-            justify-content: center; /* Center the buttons */
-        }
-        .scanline {
-            background-image: repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 1px,
-                    rgba(255, 255, 255, 0.1) 1px,
-                    rgba(255, 255, 255, 0.1) 2px
-            );
-            background-size: 100% 10px;
-            animation: scanline-animation 2s infinite;
+            justify-content: center;
         }
 
-        @keyframes scanline-animation {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 0 -20px;
-            }
-        }
-
-        * Styles for the jury section */
-        .jury-section {
-            margin-top: 2rem;
-            padding: 2rem;
-            text-align: center;
-            background-color: #000;
-            color: #fff;
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            box-sizing: border-box;
-            border-top: 4px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .jury-section h2 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 2rem;
-            color: #fff;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-        }
-
-        .jury-section p {
-            font-size: 1.2rem;
-            color: #d1d5db;
-            margin-bottom: 1rem;
-        }
-
+        /* --- Jury Section --- */
         .jury-members {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -449,8 +276,6 @@
             justify-content: center;
             margin-bottom: 2rem;
         }
-
-
         .jury-member-box {
             display: flex;
             flex-direction: column;
@@ -464,147 +289,90 @@
             padding: 1rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 0 2px #3b82f6;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-decoration: none; /* Remove underline from the entire box */
-            color: inherit; /* Inherit text color from parent */
+            text-decoration: none;
+            color: inherit;
         }
-
         .jury-member-box:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7), 0 0 0 4px #3b82f6;
         }
-
         .jury-member-box img {
             width: 120px;
             height: 120px;
-            border-radius: .5rem;
+            border-radius: 0.5rem;
             object-fit: cover;
             margin-bottom: 1rem;
             box-shadow: inset 0 0 10px #6ee7b7;
         }
-
-        /* Style for the name inside the link */
         .jury-member-name {
             font-family: 'Press Start 2P', monospace;
             font-size: 1.2rem;
             color: #fff;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-            transition: color 0.3s ease; /* Add transition for hover effect */
+            transition: color 0.3s ease;
         }
-
         .jury-member-box:hover .jury-member-name {
-            color: #34d399; /* Change text color on hover */
+            color: #34d399;
         }
-
 
         /* --- Sponsors Section --- */
-
         .sponsors-section {
-            padding: 2rem;
-            text-align: center;
-            background-color: #000; /* Direct color value */
-            color: #fff; /* Direct color value */
-            border-top: 2px solid #6ee7b7; /* Direct color value */
-            margin: 2rem 0; /* Space from previous content */
+            border-top: 2px solid #6ee7b7;
+            margin: 2rem 0;
         }
-
-        .sponsors-section h2 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 1.5rem; /* Slightly smaller than main headings */
-            margin-bottom: 1rem;
-            color: #6ee7b7; /* Direct color value */
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-        }
-
         .sponsors-list {
             display: flex;
-            flex-wrap: wrap; /* Allows wrapping on smaller screens */
-            justify-content: center; /* Center sponsors horizontally */
-            align-items: center; /* Center vertically */
-            gap: 2rem; /* Spacing between sponsors */
+            flex-wrap: wrap; /* Wrap on smaller screens */
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
             margin: 3rem auto;
         }
-
         .sponsor {
             display: flex;
-            flex-direction: column; /* Stack logo and name vertically */
-            align-items: center; /* Center items within each sponsor */
+            flex-direction: column;
+            align-items: center;
             justify-content: space-between;
-            text-decoration: none; /* Remove underline from links */
-            color: #fff; /* Direct color value */
+            text-decoration: none;
+            color: #fff;
             transition: color 0.3s ease;
-            height: 150px;
+            height: 150px; /* Consistent height */
         }
-
         .sponsor:hover {
-            color: #34d399; /* Direct color value */
+            color: #34d399;
         }
-
         .sponsor-logo {
-            width: 160px; /* Adjust as needed for your logos */
-            height: auto; /* Maintain aspect ratio */
-            margin-bottom: 0.5rem; /* Space between logo and name */
-            border: 2px solid transparent; /* For potential hover effect */
-            border-radius: 0.25rem; /* Slightly rounded corners */
-            transition: border-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+            width: 160px; /* Adjust as needed */
+            height: auto;
+            margin-bottom: 0.5rem;
+            border: 2px solid transparent;
+            border-radius: 0.25rem;
+            transition: border-color 0.3s ease, transform 0.3s ease;
             padding: 1rem;
         }
-
-        .sponsor:hover  {
-            border-color: #6ee7b7; /* Direct color value */
-            transform: scale(1.05); /* Slightly enlarge on hover */
+        .sponsor:hover .sponsor-logo { /* Hover effect on the logo */
+            border-color: #6ee7b7;
+            transform: scale(1.05);
         }
-
         .sponsor-name {
-            font-family: 'Inter', sans-serif; /* Or 'Monospace' if you prefer */
+            font-family: 'Inter', sans-serif;
             font-size: 1rem;
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-
         }
-
-        /* Add the hashtag styles from earlier, if not already present */
         .hashtag {
             font-size: 1.5rem;
-            color: #ffdb58; /* Direct color value */
+            color: #ffdb58;
             font-family: 'Press Start 2P', monospace;
             text-shadow: 0 0 12px rgba(255, 219, 88, 0.9);
-            margin-top: 1rem; /* Space from sponsors */
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 640px) {
-            .sponsors-section {
-                margin: 0 auto;
-                padding: 0;
-            }
-            .sponsor-logo {
-                width: 100%; /* Smaller logos on small screens */
-            }
-            .sponsor-name{
-                font-size: 0.7rem;
-            }
-        }
-
-        /* Add the hashtag styles from earlier, if not already present */
-        .hashtag {
-            font-size: 1.5rem;
-            color: #ffdb58; /* Example color - adjust as needed */
-            font-family: 'Press Start 2P', monospace;
-            text-shadow: 0 0 12px rgba(255, 219, 88, 0.9);
-            margin-top: 1rem; /* Space from sponsors */
-        }
-
+        /* --- Footer --- */
         .page-footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
             width: 100%;
-            background-color: #000; /* Same as main background */
             text-align: center;
-            padding: 0.5rem 0; /* Small padding */
+            padding: 0.5rem 0;
             font-size: 0.8rem;
             z-index: 10;
-
-            /* Scanline animation - copied from h1 and adjusted */
             background-image: repeating-linear-gradient(
                     to bottom,
                     transparent 0,
@@ -617,121 +385,98 @@
             background-clip: text;
             color: transparent; /* Make text transparent - scanline shows through */
             animation: scanline 6s linear infinite; /* Same animation as h1 */
-
         }
-
         .footer-link {
-            display: block; /* Make the link fill the entire footer area */
+            display: block;
             width: 100%;
             height: 100%;
-            color: #fff; /* White text (scanline will be visible) */
-            text-decoration: none;
-            transition:  text-shadow 0.3s ease; /* Smooth transitions */
-
+            transition:  text-shadow 0.3s ease;
         }
         .footer-link:hover{
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
-
         }
 
-
-        /* New styles for the rules section */
-        .rules-section {
-            padding: 2rem;
-            text-align: center;
-            background-color: #000;
-            color: #fff;
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .rules-section h2 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-            text-align: center;
-            background-image: repeating-linear-gradient(
-                    to bottom,
-                    transparent 0,
-                    transparent 1px,
-                    #fff 1px,
-                    #fff 3px
-            );
-            background-size: 100% 3px;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: scanline 6s infinite;
-        }
-
-        .rules-section ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 2rem;
-            text-align: left;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 600px;
-            border: 2px solid #4ade80;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
-        }
-
-        .rules-section li {
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-            color: #d1d5db;
-            padding-left: 1rem;
-            position: relative;
-        }
-        .rules-section li::before{
-            content: '>';
-            color: #4ade80;
+        /* --- Code Snippets (Background) --- */
+        .code-snippets-container {
             position: absolute;
-            left: 0;
+            inset: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+            overflow: hidden;
+            pointer-events: none; /* Important:  Makes the code snippets non-interactive */
+            z-index: 1;
         }
 
-        .rules-section p {
-            font-size: 1.2rem;
-            color: #d1d5db;
-            margin-bottom: 1rem;
-            text-align: center;
+        .code-snippet {
+            font-family: 'Monospace', monospace;
+            color: #34d399;
+            font-size: 0.75rem;
+            white-space: pre;
+            user-select: none;
+            text-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
+            opacity: 0.1;
+            position: absolute;  /* Positioned absolutely within the container */
+            animation: moveCode 15s infinite linear;
         }
 
-        pre {
-            background-color: #111; /* Black background */
-            color: #fff; /* White text */
-            font-family: 'Monospace', monospace; /* Monospace font for code */
-            border: 2px solid #4ade80; /* Green border, from rules box */
-            border-radius: 0.5rem; /* Rounded corners */
-            padding: 1rem; /* Padding inside the block */
-            margin: 1rem auto; /* Margin around the block, auto for horizontal centering */
-            overflow-x: auto; /* Horizontal scrollbar for long code lines */
-            max-width: 600px; /* Match max-width of rules box */
-            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5); /* Green shadow, from rules box */
-            line-height: 1.5;  /* Improved line height for readability */
-            text-align: left; /* left align the text */
+        @keyframes moveCode {
+            0%   { transform: translate(var(--startX), var(--startY)); opacity: 0.1; }
+            100% { transform: translate(var(--endX), var(--endY));   opacity: 0.1; }
         }
 
-        /* Style for the code element (inside pre) */
-        code {
-            font-family: 'Monospace', monospace; /* Ensure monospace font */
-            color: #fff; /* White text color */
-            font-size: 0.8rem; /* smaller font size */
-            display: block;  /* Important!  code is inline by default.  Make it block */
-            white-space: pre-wrap; /* handle line wrapping */
-            background-color: transparent; /* code element should not have background */
+        /* --- Responsive Adjustments --- */
+        /* Mobile-First Approach: Start with styles for small screens */
+        /* Larger Viewports */
+        @media (min-width: 640px) { /* sm breakpoint in Tailwind */
+            .rules-section ul { max-width: 600px; }
+            pre { max-width: 600px; }
+            h1 { font-size: 3rem; }
+            .deadline-text { font-size: 1rem; }
+            .sponsor-logo { width: 80px; }
+            .sponsor-name { font-size: 0.7rem; }
+            .jury-section h2, .rules-section h2, .submission-section h2, .header-below-fold  { font-size: 1.5rem;}
+            .submission-section p, .rules-section ul li, .rules-section p{ font-size: 0.9rem;}
+            .jury-member-name{ font-size: 0.9rem;}
         }
 
-        /* CSS Down Chevron */
+        @media (min-width: 768px) { /* md breakpoint in Tailwind */
+            h1 { font-size: 4rem; }
+            .deadline-text { font-size: 1.2rem;}
+            .sponsor-logo { width: 120px; } /* Larger on medium screens */
+            .sponsor-name { font-size: 0.9rem; }
+            .jury-section h2, .rules-section h2, .submission-section h2, .header-below-fold  { font-size: 1.8rem;}
+            .submission-section p, .rules-section ul li, .rules-section p{ font-size: 1rem;}
+            .jury-member-name{ font-size: 1rem;}
+        }
+
+        @media (min-width: 1024px) { /* lg breakpoint in Tailwind */
+            .sponsor-logo { width: 160px; } /* Largest on large screens */
+            .sponsor-name { font-size: 1rem; }
+            .jury-section h2, .rules-section h2, .submission-section h2, .header-below-fold  { font-size: 2rem;}
+            .submission-section p, .rules-section ul li, .rules-section p{ font-size: 1.2rem;}
+            .jury-member-name{ font-size: 1.2rem;}
+        }
+
+        /* Sponsor Section - Mobile Specific */
+        @media (max-width: 767px) { /* Targeting mobile devices */
+            .sponsors-list {
+                grid-template-columns: repeat(2, 1fr); /* Two columns on mobile */
+                gap: 1rem; /* Reduce gap on smaller screens */
+            }
+            .sponsor-logo {
+                width: 80px; /* Smaller logos on mobile */
+                padding: 0.5rem; /* Less padding */
+            }
+            .sponsor {
+                height: auto; /* Allow height to adjust */
+            }
+        }
         .scroll-indicator {
             position: absolute;
-            bottom: 20px;
+            /* Use max() for fallback and env() for modern browsers */
+            bottom: max(40px, calc(20px + env(safe-area-inset-bottom)));
             left: 50%;
             transform: translateX(-50%);
             width: 0;
@@ -761,48 +506,43 @@
 </head>
 <body>
 <div class="container">
-    <div class="scanline-effect"></div>
     <div class="code-snippets-container">
     </div>
     <div class="main-content">
-        <h1>#vibejam</h1>
-        <p class="deadline-text">Deadline: <span class="deadline-date scanline-effect">04.01.2025<span class="blinking-cursor">|</span></span></p>
+        <h1 class="scanline">#vibejam</h1>
+        <p class="deadline-text">Deadline: <span class="deadline-date">04.01.2025<span class="blinking-cursor">|</span></span></p>
+        <div class="scroll-indicator"></div>
     </div>
-    <div class="scroll-indicator"></div>
-</div>
-<div class="header-below-fold">
-    2025 Vibe Coding Game Jam
+
 </div>
 
-<div class="rules-section">
-    <h2 class="scanline">Rules</h2>
-    <ul>
-        <li><strong>Deadline:</strong> 04.01.2025</li>
-        <li><strong>Build With AI:</strong> 80% of code must be written by AI</li>
-        <li><strong>Language:</strong> Use any framework you'd like. Three.js is a popular choice.</li>
-        <li><strong>Collaboration:</strong> Teams of up to 4 people.</li>
-        <li><strong>Mobile Ready:</strong> Games should be playable on a mobile browser.</li>
-        <li><strong>Fast:</strong> No loading screens or heavy downloads (!!!)</li>
-    </ul>
-    <div class="code-container">
-        <div class="code-title"><h3>Use this code in your game to qualify</h3></div>
+<div class="below-fold-content">
+    <h2 class="header-below-fold">2025 Vibe Coding Game Jam</h2>
+
+    <div class="rules-section">
+        <h2>Rules</h2>
+        <ul>
+            <li><strong>Deadline:</strong> 04.01.2025</li>
+            <li><strong>Build With AI:</strong> 80% of code must be written by AI</li>
+            <li><strong>Language:</strong> Use any framework. Three.js is popular.</li>
+            <li><strong>Collaboration:</strong> Teams of up to 4 people.</li>
+            <li><strong>Mobile Ready:</strong> Games should work on mobile.</li>
+            <li><strong>Fast:</strong> No loading screens or heavy downloads!</li>
+        </ul>
+        <p>Use this code in your game to qualify:</p>
         <pre><code>&lt;a target="_blank" href="https://jam.pieter.com" style="font-family: 'system-ui', sans-serif; position: fixed; bottom: -1px; right: -1px; padding: 7px; font-size: 14px; font-weight: bold; background: #fff; color: #000; text-decoration: none; z-index: 10; border-top-left-radius: 12px; z-index: 10000; border: 1px solid #fff;"&gt;🕹️ Vibe Jam 2025&lt;/a&gt;</code></pre>
     </div>
-</div>
 
-<div class="submission-section">
-    <h2>Submit Your Game</h2>
-    <p>Share your AI-powered game with the community!</p>
-    <div class="submission-form-container">
+    <div class="submission-section">
+        <h2>Submit Your Game</h2>
+        <p>Share your AI-powered game with the community!</p>
         <div class="button-container">
-            <a href="http://jam.pieter.com" class="submit-button purple scanline">
+            <a href="http://jam.pieter.com" class="submit-button">
                 <span>Submit Game</span>
             </a>
         </div>
     </div>
-</div>
 
-<div class="below-fold-content">
     <div class="jury-section">
         <h2>Jury</h2>
         <div class="jury-members">
@@ -827,87 +567,57 @@
                 <span class="jury-member-name">@levelsio</span>
             </a>
         </div>
-        <div class="sponsors-section">
-            <h2>Sponsored By</h2>
-            <div class="sponsors-list">
-                <a href="https://www.boltdotnew.com" target="_blank" rel="noopener noreferrer" class="sponsor">
-                    <img src="/bolt.svg" alt="Bolt.new Logo" class="sponsor-logo">
-                    <span class="jury-member-name">@boltdotnew</span>
-                </a>
-                <a href="https://www.coderabbit.ai/" target="_blank" rel="noopener noreferrer" class="sponsor">
-                    <img src="/coderabbit.svg" alt="CoderabbitAI Logo" class="sponsor-logo">
-                    <span class="jury-member-name">@coderabbitai</span>
-                </a>
-            </div>
-            <p class="hashtag">Hashtag: #vibejam</p>
-        </div>
     </div>
+    <div class="sponsors-section">
+        <h2>Sponsored By</h2>
+        <div class="sponsors-list">
+            <a href="https://www.boltdotnew.com" target="_blank" rel="noopener noreferrer" class="sponsor">
+                <img src="/bolt.svg" alt="Bolt.new Logo" class="sponsor-logo">
+                <span class="sponsor-name">@boltdotnew</span>
+            </a>
+            <a href="https://coderabbitai.com" target="_blank" rel="noopener noreferrer" class="sponsor">
+                <img src="/coderabbit.svg" alt="CoderabbitAI Logo" class="sponsor-logo">
+                <span class="sponsor-name">@coderabbitai</span>
+            </a>
+        </div>
+        <p class="hashtag">Hashtag: #vibejam</p>
+    </div>
+
     <footer class="page-footer">
         <a href="https://www.builtbyvibes.com" target="_blank" rel="noopener noreferrer" class="footer-link">
-            <h3 class="scanline-effect">builtbyvibes</h3>
+            builtbyvibes
         </a>
     </footer>
 </div>
+
 <script>
-
-    const codeSnippets = [
-        "// Three.js - Create Scene",
-        "const scene = new THREE.Scene();",
-        "// Three.js - Setup Camera",
-        "const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);",
-        "// Three.js - Add Geometry",
-        "const geometry = new THREE.BoxGeometry(1, 1, 1);",
-        "// Three.js - Create Material",
-        "const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });",
-        "// Three.js - Create Mesh",
-        "const cube = new THREE.Mesh(geometry, material);",
-        "// Three.js - Add to Scene",
-        "scene.add(cube);",
-        "// Three.js - Position Camera",
-        "camera.position.z = 5;",
-        "// Three.js - Render Scene",
-        "function animate() {",
-        "  requestAnimationFrame(animate);",
-        "  cube.rotation.x += 0.01;",
-        "  cube.rotation.y += 0.01;",
-        "  renderer.render(scene, camera);",
-        "}",
-        "Reticulating Splines",
-        "// --- Three.js --",
-        "// AI Vibe Generator v1.2",
-        "function createVibe(input) {",
-        "  let vibe = new Vibe();",
-        "  vibe.setInput(input);",
-        "  vibe.process();",
-        "  return vibe;",
-        "}",
-        "// End of Snippet",
-        "// Random Art Generation",
-        "for (let i = 0; i < 100; i++) {",
-        "  let x = Math.random() * window.innerWidth;",
-        "  let y = Math.random() * window.innerHeight;",
-        "  drawCircle(x, y, Math.random() * 20);",
-        "}",
-        "// Procedural Melody",
-        "const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];",
-        "function playMelody() {",
-        "  notes.forEach((note, i) => {",
-        "    const now = audioContext.currentTime + i * 0.2;",
-        "    playNote(note, now);",
-        "  });",
-        "}",
-        "// Texture Generation",
-        "const canvas = document.createElement('canvas');",
-        "const ctx = canvas.getContext('2d');",
-        "ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);",
-        "ctx.fillRect(0,0,canvas.width,canvas.height);",
-    ];
-
     document.addEventListener('DOMContentLoaded', function() {
 
         const codeSnippetsContainer = document.querySelector('.code-snippets-container');
-        const container = document.querySelector('.container');
 
+        const codeSnippets = [
+            "// Three.js - Create Scene", "const scene = new THREE.Scene();",
+            "// Three.js - Camera", "const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);",
+            "// Three.js - Geometry", "const geometry = new THREE.BoxGeometry(1, 1, 1);",
+            "// Three.js - Material", "const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });",
+            "// Three.js - Mesh", "const cube = new THREE.Mesh(geometry, material);",
+            "// Three.js - Add to Scene", "scene.add(cube);",
+            "// Three.js - Camera Pos", "camera.position.z = 5;",
+            "// Three.js - Render", "function animate() {", "  requestAnimationFrame(animate);",
+            "  cube.rotation.x += 0.01;", "  cube.rotation.y += 0.01;", "  renderer.render(scene, camera);", "}",
+            "// --- Three.js --", "// AI Vibe v1.2",
+            "function createVibe(input) {", "  let vibe = new Vibe();", "  vibe.setInput(input);",
+            "  vibe.process(); return vibe; }", "// End of Snippet",
+            "// Random Art", "for (let i = 0; i < 100; i++) {",
+            "  let x = Math.random() * window.innerWidth;", "  let y = Math.random() * window.innerHeight;",
+            "  drawCircle(x, y, Math.random() * 20); }", "// Procedural Melody",
+            "const notes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];",
+            "function playMelody() { notes.forEach((note, i) => {",
+            "const now = audioContext.currentTime + i * 0.2; playNote(note, now); }); }",
+            "// Texture Gen", "const canvas = document.createElement('canvas');",
+            "const ctx = canvas.getContext('2d');", "ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);",
+            "ctx.fillRect(0,0,canvas.width,canvas.height);"
+        ];
 
         function getRandomCodeSnippet() {
             return codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
@@ -917,8 +627,6 @@
             const snippet = document.createElement('div');
             snippet.classList.add('code-snippet');
             snippet.textContent = getRandomCodeSnippet();
-            snippet.style.left = `${Math.random() * 100}%`;
-            snippet.style.top = `${Math.random() * 100}%`;
             snippet.style.opacity = '0.1';
             const keyframesName = `moveSnippet${Date.now()}`;
             const startX = Math.random() * window.innerWidth - window.innerWidth / 2;
@@ -926,35 +634,29 @@
             const endX = Math.random() * window.innerWidth - window.innerWidth / 2;
             const endY = Math.random() * window.innerHeight - window.innerHeight / 2;
 
-
             snippet.style.setProperty('--startX', `${startX}px`);
             snippet.style.setProperty('--startY', `${startY}px`);
             snippet.style.setProperty('--endX', `${endX}px`);
             snippet.style.setProperty('--endY', `${endY}px`);
 
-
-            let styleEl = document.getElementById('snippet-styles');
+            let styleEl = document.getElementById('snippet-styles'); // Get the style element
             if (!styleEl) {
                 styleEl = document.createElement('style');
                 styleEl.id = 'snippet-styles';
                 document.head.appendChild(styleEl);
             }
+
             if (styleEl.sheet) {
                 try {
                     const cssRule = `@keyframes ${keyframesName} {
-                        0% {
-                            transform: translate(var(--startX), var(--startY));
-                            opacity: 0.1;
-                        }
-                        100% {
-                            transform: translate(var(--endX), var(--endY));
-                            opacity: 0.1;
-                        }
-                    }`;
+                    0% { transform: translate(var(--startX), var(--startY)); opacity: 0.1; }
+                    100% { transform: translate(var(--endX), var(--endY)); opacity: 0.1; }
+                }`;
                     styleEl.sheet.insertRule(cssRule, 0);
                     snippet.style.animationName = keyframesName;
                     snippet.style.animationDuration = `${Math.random() * 12 + 15}s`;
-                    snippet.style.animationIterationCount = 'infinite'; // Fixed: Use 'infinite'
+                    snippet.style.animationTimingFunction = 'linear';
+                    codeSnippetsContainer.appendChild(snippet);
                 } catch (error) {
                     console.error("Error inserting CSS rule:", error);
                     snippet.style.animationName = 'none';
@@ -962,83 +664,13 @@
                     snippet.style.opacity = 0.15;
                 }
             }
-            return snippet;
-        }
 
+        }
+        // Create all snippets at once
         for (let i = 0; i < 30; i++) {
-            const snippet = createCodeSnippetElement();
-            snippet.style.left = `${Math.random() * 100}%`;
-            codeSnippetsContainer.appendChild(snippet);
+            createCodeSnippetElement();
         }
     });
-
-    const codeSnippetsContainer = document.querySelector('.code-snippets-container');
-    const container = document.querySelector('.container');
-
-
-    function getRandomCodeSnippet() {
-        return codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-    }
-
-    function createCodeSnippetElement() {
-        const snippet = document.createElement('div');
-        snippet.classList.add('code-snippet');
-        snippet.textContent = getRandomCodeSnippet();
-        snippet.style.left = `${Math.random() * 100}%`;
-        snippet.style.top = `${Math.random() * 100}%`;
-        snippet.style.opacity = '0.1';
-        const keyframesName = `moveSnippet${Date.now()}`;
-        const startX = Math.random() * window.innerWidth - window.innerWidth / 2;
-        const startY = Math.random() * window.innerHeight - window.innerHeight / 2;
-        const endX = Math.random() * window.innerWidth - window.innerWidth / 2;
-        const endY = Math.random() * window.innerHeight - window.innerHeight / 2;
-
-
-        snippet.style.setProperty('--startX', `${startX}px`);
-        snippet.style.setProperty('--startY', `${startY}px`);
-        snippet.style.setProperty('--endX', `${endX}px`);
-        snippet.style.setProperty('--endY', `${endY}px`);
-
-
-        let styleEl = document.getElementById('snippet-styles');
-        if (!styleEl) {
-            styleEl = document.createElement('style');
-            styleEl.id = 'snippet-styles';
-            document.head.appendChild(styleEl);
-        }
-        if (styleEl.sheet) {
-            try {
-                const cssRule = `@keyframes ${keyframesName} {
-                        0% {
-                            transform: translate(var(--startX), var(--startY));
-                            opacity: 0.1;
-                        }
-                        100% {
-                            transform: translate(var(--endX), var(--endY));
-                            opacity: 0.1;
-                        }
-                    }`;
-                styleEl.sheet.insertRule(cssRule, 0);
-                snippet.style.animationName = keyframesName;
-                snippet.style.animationDuration = `${Math.random() * 12 + 15}s`;
-                snippet.style.animationIterationCount = 'linear';
-            } catch (error) {
-                console.error("Error inserting CSS rule:", error);
-                snippet.style.animationName = 'none';
-                snippet.style.transform = `translate(${startX}px, ${startY}px)`;
-                snippet.style.opacity = 0.15;
-            }
-        }
-        return snippet;
-    }
-
-    for (let i = 0; i < 30; i++) {
-        const snippet = createCodeSnippetElement();
-        snippet.style.left = `${Math.random() * 100}%`;
-        codeSnippetsContainer.appendChild(snippet);
-    }
-
-
-
 </script>
 </body>
+</html>
